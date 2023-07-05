@@ -1,8 +1,3 @@
-<!-- importing font families
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-
-<span style="font-family:Roboto Mono ; font-size: 4em;"></span> -->
-
 # SBM : storage and backup Management
 
 ## Physical storages can be classffied on the basis of
@@ -23,8 +18,21 @@
     - #### data need to be moved from disk to main memory to access
     - #### much slower than main memory
     - #### non volatile
-- ### direct-access :
-    - #### 
+- ### Optical-storage :
+    - #### non volatile
+    - #### CD-ROM: 640 MB
+    - #### DVD: (4.7-17) GB
+    - #### Blu-ray: (27-54) GB
+    - #### write one time, read many times
+    - #### Slower than magnetic disks
+- ### Tape storage :
+    - #### non volatile : primarily used for backup
+    - #### non volatile : Sequential access
+    - #### non volatile : very high capacity
+    - #### non volatile : very high capacity
+
+
+
 
 
 
