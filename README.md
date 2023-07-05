@@ -5,6 +5,12 @@
 
 # SBM : storage and backup Management
 
+### Physical storages can be classffied on the basis of
+- Speed
+- Cost
+- Reliablity
+- volatility
+
 
 
 
