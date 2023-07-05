@@ -26,10 +26,10 @@
     - #### write one time, read many times
     - #### Slower than magnetic disks
 - ### Tape storage :
-    - #### non volatile : primarily used for backup
-    - #### non volatile : Sequential access
-    - #### non volatile : very high capacity
-    - #### non volatile : very high capacity
+    - #### primarily used for backup
+    - #### Sequential access
+    - #### very high capacity
+    - #### very high capacity
 
 
 
