@@ -1,9 +1,9 @@
 # On iSCSI client
 ```bash
-yum install iSCSI-initiator-utils -y
-cd /etc/iSCSI
-echo InitiatorName=iqn.2022-12.acts.student:306631cea220 > initiatorname.iSCSI
-systemctl start iSCSI;systemctl status iSCSI;
+yum install iscsi-initiator-utils -y
+cd /etc/iscsi
+echo InitiatorName=iqn.2022-12.acts.student:306631cea220 > initiatorname.iscsi
+systemctl start iscsi;systemctl status iscsi;
 ```
 
 # on iSCSI server
@@ -11,14 +11,14 @@ systemctl start iSCSI;systemctl status iSCSI;
 ```bash
 lsblk
 pvcreate /dev/sdb /dev/sdc /dev/sdd
-vgcreate vg_iSCSI /dev/sdb /dev/sdc /dev/sdd
-lvcreate -n lv_iSCSI-disk-01 -L 1G vg_iSCSI
+vgcreate vg_iscsi /dev/sdb /dev/sdc /dev/sdd
+lvcreate -n lv_iscsi-disk-01 -L 1G vg_iscsi
 lvs
 yum install targetcli -y
 targetcli
 cd backstores/block
-create block1 /dev/mapper/vg_iSCSI-lv_iSCSI--disk--01
-cd ../../iSCSI
+create block1 /dev/mapper/vg_iscsi-lv_iscsi--disk--01
+cd ../../iscsi
 create iqn.2022-12.cdac.acts.hpcsa.sbm:disk1
 cd iqn.2022-12.cdac.acts.hpcsa.sbm:disk1/tpg1/acls
 create iqn.2022-12.acts.student:306631cea220
