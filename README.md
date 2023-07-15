@@ -30,7 +30,7 @@
     - #### Sequential access
     - #### very high capacity
     - #### very high capacity
-
+---
 ![](./Diagrams/Storages_2.jpg)
 
 
