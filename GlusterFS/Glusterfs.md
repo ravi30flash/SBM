@@ -49,7 +49,7 @@ cat << EOF >> /etc/hosts
 
 # create a gluster file server
 ```bash
-# run on all 3 mahines
+# run on all 3 machines
     # turn on the interface
     ifup ens33
 
