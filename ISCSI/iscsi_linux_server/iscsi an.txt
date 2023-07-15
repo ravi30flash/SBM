@@ -1,0 +1,94 @@
+iscsi configuration on centos7
+------------------------------
+
+*****On iscsi-client*****
+-------------------------
+
+# yum install iscsi-initiator-utils -y
+
+# cd /etc/iscsi
+
+# vi initiatorname.iscsi			>> # change client name to >>  
+InitiatorName=iqn.2022-12.acts.student:306631cea220
+
+# systemctl start iscsi
+
+# systemctl status iscsi
+
+*****On iscsi-server*****
+-------------------------
+
+(Add Two Hard disk sdb and sdc of 20GB each)
+
+
+# lsblk     or  # sfdisk -s
+
+# fdisk -l
+
+# pvcreate /dev/sdb /dev/sdc
+pvcreate /dev/sdb /dev/sdc /dev/sdd
+
+# vgcreate vg_iscsi /dev/sdb /dev/sdc
+vgcreate vg_iscsi /dev/sdb /dev/sdc /dev/sdd
+
+# lvcreate -n lv_iscsi-disk-01 -L 1G vg_iscsi
+lvcreate -n lv_iscsi-disk-01 -L 1G vg_iscsi
+
+# lvs                               --> show partitions
+
+# yum install targetcli -y
+
+# targetcli                              #  cmd line utility
+
+/> cd backstores/block
+
+> create block1 /dev/mapper/vg_iscsi-lv_iscsi--disk--01                   # portal option like TrueNAS where disk-01 is path to Extent
+
+> cd ../../iscsi                                                          # target option  
+
+> create iqn.2022-12.cdac.acts.hpcsa.sbm:disk1                            # Thid cmd map the portal group to target group
+
+> cd iqn.2022-12.cdac.acts.hpcsa.sbm:disk1/tpg1/acls                      # portal provide available iqn number based on ACLS
+
+> create iqn.2022-12.acts.student:306631cea220                            #
+
+> cd ..
+
+> cd iqn.2022-12.cdac.acts.hpcsa.sbm:disk1/tpg1/luns                    # on this line we r doin association like TrueNAS
+
+> create /backstores/block/block1                                       # Like associate target in trueNas we associate the target(tgp1/lun) to extent(backstores/block)
+
+> exit
+
+
+# systemctl start target
+
+# systemctl status target
+
+
+
+*****On iscsi-client*****
+-------------------------
+
+# iscsiadm -m discovery -t st -p 192.168.64.144 --login                -->  #XXX=server IP :: Note Ensure firewalld service is disabled on both the machines
+
+# fdisk -l
+
+# fdisk /dev/sdx                                                       --> #use X=iscsi mount disk
+
+# #Press :n then enter enter
+  #Press key :w
+ 
+# fdisk -l
+
+# mkdir /mnt/disk-1
+
+# mkfs.xfs -f /dev/sdx     or  # mkfs.ext4 /dev/sdx
+
+# mount /dev/sdx /mnt/disk-1/
+
+# df -Th
+
+
+
+here we r mapping the client iqn number to server iqn number .
