@@ -78,7 +78,7 @@ gluster pool list;
 ![](./images/8.jpg)
 ![](./images/9.jpg)
 
-# create a gluster volume
+# create a gluster volume on server
 ```bash
 # create a directory
 mkdir /mnt/disk1/diskvol
@@ -90,15 +90,33 @@ mkdir /mnt/disk1;
 mount /dev/sdb1 /mnt/disk1;
 lsblk;
 
-# create a volume
+# create a volume for distributed mode
 gluster volume create gdisk1 replica 3 node1.hpcsa.in:/mnt/disk1/diskvol/gdisk1 node2.hpcsa.in:/mnt/disk1/diskvol/gdisk1  node3.hpcsa.in:/mnt/disk1/diskvol/gdisk1
+# create a volume for disperse mode
+gluster volume create gdisk1 disperse 3 redundancy 1 node1.hpcsa.in:/mnt/disk1/diskvol/gdisk1 node2.hpcsa.in:/mnt/disk1/diskvol/gdisk1  node3.hpcsa.in:/mnt/disk1/diskvol/gdisk1
 
 # start the volume   
 gluster volume start gdisk1
 
+# information about the volume
+gluster volume info gdisk1
 ```
 ![](./images/10.jpg)
+![](./images/11.jpg)
+![](./images/12.jpg)
+---
+# mount the Gluster Volume on gluster client
 
+```bash
+# installing the package
+yum install glusterfs-fuse
 
+# create a directory 
+mkdir /mnt/gdrive
 
+# Mount the Gluster volume on the client
+mount -t glusterfs node1:/gdisk1 /mnt/gdrive
+```
+![](./images/13.jpg)
+![](./images/14.jpg)
 
