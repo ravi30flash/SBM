@@ -1,0 +1,37 @@
+compute01 : 10.10.10.173 
+ssh root@10.10.10.173;
+
+compute02 : 10.10.10.171
+ssh root@10.10.10.171
+
+monitor : 10.10.10.169
+ssh root@10.10.10.169
+
+controller : 10.10.10.170
+ssh root@10.10.10.170
+
+client : 10.10.10.172
+ssh root@10.10.10.172
+
+
+redirectional operators
+
+> : std output
+>> : append
+< : std input
+<< : input append
+
+based on program status code
+0 : successful run
+1 : error
+
+output state
+1 : successful run
+2 : error 
+
+service > /dev/null
+service 1> /dev/null
+service 2> /dev/null
+service &> /dev/null
+
+
